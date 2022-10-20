@@ -5,19 +5,20 @@ import Footer from './component/footer/footer';
 import Header from './component/header/header';
 import Login from './component/login/login';
 import Registration from './component/register/register';
+import Sidebar from './component/sidebar/sidebar';
+import Product from './component/product/product';
 
 function App() {
   return (
     <>
-    <Header/>
-    <Routes>
-    {/* <Route path='/' element={<Header/>}/> */}
-
-      <Route path='/register' element={<Registration/>}/>
-      <Route path='/login' element={<Login/>}/>
-
-    </Routes>
-   
+      <Routes>
+        {/* <Route path='/' element={<Product />} /> */}
+        <Route path='/' element={<Master />}>
+          <Route path='/register' element={<Registration />} />
+        <Route path='' element={<Sidebar />} />
+          <Route path='/login' element={<Login />} />
+        </Route>
+      </Routes>
     </>
   );
 }
