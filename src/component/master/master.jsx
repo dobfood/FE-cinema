@@ -4,6 +4,7 @@ import Footer from "../footer/footer";
 export default function Master() {
   return (
     <>
+    
       <Footer />
       <Outlet />
     </>
