@@ -1,17 +1,15 @@
 import { Fragment } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { useState } from "react";
+import { Link } from "react-router-dom";
 
-const navigation = [
-  { name: "Dashboard", href: "#", current: true },
-  { name: "Team", href: "#", current: false },
-  { name: "Projects", href: "#", current: false },
-  { name: "Calendar", href: "#", current: false },
-];
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+
+function classNames(...classNamees) {
+  return classNamees.filter(Boolean).join(" ");
 }
 export default function Header() {
+  const [current, setCurrent] = useState(false)
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -33,36 +31,81 @@ export default function Header() {
                 <div className="flex flex-shrink-0 items-center">
                   <img
                     className="block h-8 w-auto lg:hidden"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Sky_Cinema_-_Logo_2020.svg/2560px-Sky_Cinema_-_Logo_2020.svg.png"
                     alt="Your Company"
                   />
                   <img
                     className="hidden h-8 w-auto lg:block"
-                    src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
+                    src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3b/Sky_Cinema_-_Logo_2020.svg/2560px-Sky_Cinema_-_Logo_2020.svg.png"
                     alt="Your Company"
                   />
                 </div>
+                {/* Text Header */}
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    {navigation.map((item) => (
-                      <a
-                        key={item.name}
-                        href={item.href}
+                    
+                     
+                    
+                      <Link to="/"  className={classNames(
+                        current
+                          ? "bg-gray-900 text-white"
+                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        "px-3 py-2 rounded-md text-sm font-medium"
+                      )}
+                      aria-current={current ? "page" : undefined}> Trang chủ</Link>
+                    
+                  </div>
+                </div>
+
+                <div className="hidden sm:ml-6 sm:block">
+                  <div className="flex space-x-4">
+                    <button
                         className={classNames(
-                          item.current
+                        current
                             ? "bg-gray-900 text-white"
                             : "text-gray-300 hover:bg-gray-700 hover:text-white",
                           "px-3 py-2 rounded-md text-sm font-medium"
                         )}
-                        aria-current={item.current ? "page" : undefined}
+                      aria-current={current ? "page" : undefined}
                       >
-                        {item.name}
-                      </a>
-                    ))}
+                      Sản phẩm
+                    </button>
                   </div>
                 </div>
+
+                <div className="hidden sm:ml-6 sm:block">
+                  <div className="flex space-x-4">
+                    <button
+                      className={classNames(
+                        current
+                          ? "bg-gray-900 text-white"
+                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        "px-3 py-2 rounded-md text-sm font-medium"
+                      )}
+                      aria-current={current ? "page" : undefined}
+                    >
+                      Về chúng tôi
+                    </button>
               </div>
+                </div>
+              </div>
+                {/* End Header Right */}
+
+
+              {/* search */}
+              <div className="relative text-gray-600">
+                <input type="search" name="serch" placeholder="Search" className="bg-white h-10 px-5 pr-5 rounded-full text-sm focus:outline-none" />
+                
+              </div>
+
+              {/*  */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
+
+                {/* Profile dropdown */}
+                <Menu as="div" className="relative m4-3">
+                  <div>
+                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <span className="sr-only">Open user menu</span>
                 <button
                   type="button"
                   className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
@@ -70,17 +113,6 @@ export default function Header() {
                   <span className="sr-only">View notifications</span>
                   <BellIcon className="h-6 w-6" aria-hidden="true" />
                 </button>
-
-                {/* Profile dropdown */}
-                <Menu as="div" className="relative ml-3">
-                  <div>
-                    <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
-                      <span className="sr-only">Open user menu</span>
-                      <img
-                        className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
-                      />
                     </Menu.Button>
                   </div>
                   <Transition
@@ -96,69 +128,67 @@ export default function Header() {
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href=""
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Your Profile
+                            Đẹp trai
                           </a>
                         )}
                       </Menu.Item>
+                     
                       <Menu.Item>
                         {({ active }) => (
                           <a
-                            href="#"
+                            href=""
                             className={classNames(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            Settings
+                            Sát gái
                           </a>
                         )}
                       </Menu.Item>
-                      <Menu.Item>
-                        {({ active }) => (
-                          <a
-                            href="#"
-                            className={classNames(
-                              active ? "bg-gray-100" : "",
-                              "block px-4 py-2 text-sm text-gray-700"
-                            )}
-                          >
-                            Sign out
-                          </a>
-                        )}
-                      </Menu.Item>
+
+
                     </Menu.Items>
                   </Transition>
                 </Menu>
               </div>
+              {/* Register, login */}
+              <div className="hidden sm:ml-6 sm:block">
+                <div className="flex space-x-4">
+                
+                       <Link to="/register"  className={classNames(
+                      current
+                        ? "bg-gray-900 text-white"
+                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      "px-3 py-2 rounded-md text-sm font-medium"
+                    )}
+                    aria-current={current ? "page" : undefined}>  Đăng kí</Link>
+                  
             </div>
           </div>
+              <div className="hidden sm:ml-6 sm:block">
+                <div className="flex space-x-4">
 
-          <Disclosure.Panel className="sm:hidden">
-            <div className="space-y-1 px-2 pt-2 pb-3">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
-                  className={classNames(
-                    item.current
+                          <Link to="/login" className={classNames(
+                      current
                       ? "bg-gray-900 text-white"
                       : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                    "block px-3 py-2 rounded-md text-base font-medium"
+                      "px-3 py-2 rounded-md text-sm font-medium"
                   )}
-                  aria-current={item.current ? "page" : undefined}
-                >
-                  {item.name}
-                </Disclosure.Button>
-              ))}
+                    aria-current={current ? "page" : undefined}>  Đăng nhập</Link>
+                          
+                      
             </div>
-          </Disclosure.Panel>
+              </div>
+              {/* End */}
+            </div>
+          </div>
         </>
       )}
     </Disclosure>
