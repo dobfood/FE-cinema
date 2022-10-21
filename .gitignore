@@ -1,3 +1,5 @@
 node_modules
 .postcss.config
 .tailwind.config
+.packeage.config.json
+packeage.json
