@@ -5,8 +5,8 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 
-function classNames(...classes) {
-  return classes.filter(Boolean).join(" ");
+function classNames(...classNamees) {
+  return classNamees.filter(Boolean).join(" ");
 }
 export default function Header() {
   const [current, setCurrent] = useState(false)
@@ -60,14 +60,14 @@ export default function Header() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <button
-                      className={classNames(
+                        className={classNames(
                         current
-                          ? "bg-gray-900 text-white"
-                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                        "px-3 py-2 rounded-md text-sm font-medium"
-                      )}
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
                       aria-current={current ? "page" : undefined}
-                    >
+                      >
                       Sản phẩm
                     </button>
                   </div>
@@ -86,18 +86,16 @@ export default function Header() {
                     >
                       Về chúng tôi
                     </button>
-                  </div>
-                </div>
-                {/* End Header Right */}
               </div>
+                </div>
+              </div>
+                {/* End Header Right */}
 
 
               {/* search */}
-              <div class="relative text-gray-600">
-                <input type="search" name="serch" placeholder="Search" class="bg-white h-10 px-5 pr-5 rounded-full text-sm focus:outline-none" />
-                <button type="submit" class="absolute right-0 top-0 mt-3 mr-4">
-
-                </button>
+              <div className="relative text-gray-600">
+                <input type="search" name="serch" placeholder="Search" className="bg-white h-10 px-5 pr-5 rounded-full text-sm focus:outline-none" />
+                
               </div>
 
               {/*  */}
@@ -108,13 +106,13 @@ export default function Header() {
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
-                      <button
-                        type="button"
-                        className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                      >
-                        <span className="sr-only">View notifications</span>
-                        <BellIcon className="h-6 w-6" aria-hidden="true" />
-                      </button>
+                <button
+                  type="button"
+                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                >
+                  <span className="sr-only">View notifications</span>
+                  <BellIcon className="h-6 w-6" aria-hidden="true" />
+                </button>
                     </Menu.Button>
                   </div>
                   <Transition
@@ -172,21 +170,21 @@ export default function Header() {
                     )}
                     aria-current={current ? "page" : undefined}>  Đăng kí</Link>
                   
-                </div>
-              </div>
+            </div>
+          </div>
               <div className="hidden sm:ml-6 sm:block">
                 <div className="flex space-x-4">
-                 
+
                           <Link to="/login" className={classNames(
                       current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                      ? "bg-gray-900 text-white"
+                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
                       "px-3 py-2 rounded-md text-sm font-medium"
-                    )}
+                  )}
                     aria-current={current ? "page" : undefined}>  Đăng nhập</Link>
                           
                       
-                </div>
+            </div>
               </div>
               {/* End */}
             </div>
