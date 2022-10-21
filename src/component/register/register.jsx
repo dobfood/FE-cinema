@@ -112,7 +112,7 @@ export default function Registration() {
                   name="name"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
-                <a className="errors">
+                <a className="errors text-sm text-red-700 ">
                   <ErrorMessage name="name" />
                 </a>
               </div>
@@ -128,7 +128,7 @@ export default function Registration() {
                   name="email"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
-                <a className="errors">
+                <a className="errors text-sm text-red-700 ">
                   <ErrorMessage name="email" />
                 </a>
               </div>
@@ -144,7 +144,7 @@ export default function Registration() {
                   name="password"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
-                <a className="errors">
+                <a className="errors text-sm text-red-700">
                   <ErrorMessage name="password" />
                 </a>
               </div>
@@ -161,7 +161,7 @@ export default function Registration() {
                   name="confirmPassword"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
-                <a className="errors">
+                <a className="errors text-sm text-red-700">
                   <ErrorMessage name="confirmPassword" />
                 </a>
               </div>
