@@ -5,12 +5,14 @@ import Footer from './component/footer/footer';
 import Header from './component/header/header';
 import Login from './component/login/login';
 import Registration from './component/register/register';
-import Sidebar from './component/sidebar/sidebar';
+import Sidebar from './component/sidebar/index';
 import Product from './component/product/product';
+
 
 function App() {
   return (
     <>
+    
       <Routes>
         {/* <Route path='/' element={<Product />} /> */}
         <Route path='/' element={<Master />}>
