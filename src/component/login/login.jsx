@@ -4,19 +4,29 @@ import axios from "axios";
 import * as Yup from "yup";
 import bcrypt from "bcryptjs";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { showNameUser } from "../../feauture/showUser/showUser/showNameUser.Slice";
 
 const RegisterSchema = Yup.object().shape({
   email: Yup.string().required("Bắt buộc!"),
   password: Yup.string().required("Bắt buộc!"),
 });
-const handleLogin = async (data) => {
-  return await axios.post("http://localhost:2212/api/auth/signin", data);
-};
 
 export default function Login() {
+  const dispatch = useDispatch();
   const [existedEmail, setExistedEmail] = useState("");
+  const [nameUser, setNameUser] = useState({
+    name: "",
+  });
+  const handleLogin = async (data) => {
+    dispatch(showNameUser());
+    return await axios
+      .post("http://localhost:2212/api/auth/signin", data)
+      .then((res) => setNameUser(res.data.name) )
+      .catch()
+  };
   const navigate = useNavigate();
-
+  console.log(nameUser);
   return (
     // <div className="relative flex flex-col justify-center min-h-screen overflow-hidden">
     //     <div className="w-full p-6 m-auto bg-white rounded-md shadow-xl lg:max-w-xl">
@@ -115,14 +125,8 @@ export default function Login() {
       }}
       validationSchema={RegisterSchema}
       onSubmit={(value) => {
-        handleLogin(value)
-          .then((res) => {
-            console.log(res);
-            navigate("/");
-          })
-          .catch(() => {
-            setExistedEmail("Email hoặc mật khẩu không đúng!");
-          });
+        handleLogin(value);
+        
       }}
     >
       <Form>
@@ -188,8 +192,8 @@ export default function Login() {
                   name="email"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
-                <a className="errors text-sm text-red-700 " >
-                  <ErrorMessage  name="email" />
+                <a className="errors text-sm text-red-700 ">
+                  <ErrorMessage name="email" />
                 </a>
               </div>
               <div className="relative mb-4">
@@ -204,7 +208,7 @@ export default function Login() {
                   name="password"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
                 />
-                <a className="errors text-sm text-red-700 " >
+                <a className="errors text-sm text-red-700 ">
                   <ErrorMessage name="password" />
                 </a>
               </div>

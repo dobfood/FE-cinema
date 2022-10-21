@@ -45,7 +45,7 @@ export default function Registration() {
     <Formik
       initialValues={form}
       validationSchema={RegisterSchema}
-      onSubmit={(value) => {
+      onSubmit={value => {
         handleRegister(value)
           .then((res) => {
             console.log(res);
@@ -53,7 +53,7 @@ export default function Registration() {
               navigate("/login");
             }
           })
-          .catch((e) => setExistedEmail("Tài khoản đã tồn tại"));
+          .catch((e) => setExistedEmail("Email đã tồn tại!"));
       }}
     >
       <Form>
@@ -82,18 +82,24 @@ export default function Registration() {
               </h2>
 
               {existedEmail ? (
-                <div class="ml-3 text-sm font-normal">
+                <div
+                  style={{ height: 10, fontSize: 15 }}
+                  class="rounded-lg py-2 px-2 mb-3 text-base text-red-700 inline-flex items-center  "
+                  role="alert"
+                >
                   <svg
                     aria-hidden="true"
-                    class="w-5 h-5"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
+                    focusable="false"
+                    data-prefix="fas"
+                    data-icon="times-circle"
+                    class="w-4 h-4 mr-2 fill-current"
+                    role="img"
                     xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 500 500"
                   >
                     <path
-                      fill-rule="evenodd"
-                      d="M4.293 4.293a1 1 0 011.414 0L10 8.586l4.293-4.293a1 1 0 111.414 1.414L11.414 10l4.293 4.293a1 1 0 01-1.414 1.414L10 11.414l-4.293 4.293a1 1 0 01-1.414-1.414L8.586 10 4.293 5.707a1 1 0 010-1.414z"
-                      clip-rule="evenodd"
+                      fill="currentColor"
+                      d="M256 8C119 8 8 119 8 256s111 248 248 248 248-111 248-248S393 8 256 8zm121.6 313.1c4.7 4.7 4.7 12.3 0 17L338 377.6c-4.7 4.7-12.3 4.7-17 0L256 312l-65.1 65.6c-4.7 4.7-12.3 4.7-17 0L134.4 338c-4.7-4.7-4.7-12.3 0-17l65.6-65-65.6-65.1c-4.7-4.7-4.7-12.3 0-17l39.6-39.6c4.7-4.7 12.3-4.7 17 0l65 65.7 65.1-65.6c4.7-4.7 12.3-4.7 17 0l39.6 39.6c4.7 4.7 4.7 12.3 0 17L312 256l65.6 65.1z"
                     ></path>
                   </svg>
                   {existedEmail}

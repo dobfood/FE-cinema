@@ -1,8 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
-import productReducer from './productReducer';
+// import productReducer from './productReducer';
+import showNameUserReducer from "../feauture/showUser/showUser/showNameUser.Slice"
+
 const store = configureStore({
     reducer : {
-        phone : productReducer,
+        // phone : productReducer,
+        showUser: showNameUserReducer,
     }
 })
 
