@@ -19,13 +19,15 @@ const RegisterSchema = Yup.object().shape({
       /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
       "Email không đúng định dạng.(vd: abc@gmail.com)"
     ),
-  password: Yup.string().required("Bắt buộc")
-  .matches(
-    /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
-    "Mật khẩu phải ít nhất 8 ký tự ít nhất một viết hoa, một viết thường và một số."),
-    confirmPassword: Yup.string()
-      .required('Bắt buộc!')
-      .oneOf([Yup.ref("password"), null], "Mật khẩu không khớp!"),
+  password: Yup.string()
+    .required("Bắt buộc")
+    .matches(
+      /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
+      "Mật khẩu phải ít nhất 8 ký tự ít nhất một viết hoa, một viết thường và một số."
+    ),
+  confirmPassword: Yup.string()
+    .required("Bắt buộc!")
+    .oneOf([Yup.ref("password"), null], "Mật khẩu không khớp!"),
 });
 
 export default function Registration() {
@@ -35,7 +37,6 @@ export default function Registration() {
     name: "",
     email: "",
     password: "",
-    // confirmPassword: "",
   });
   const handleRegister = async (data) => {
     return await axios.post("http://localhost:2212/api/auth/signup", data);
@@ -49,12 +50,10 @@ export default function Registration() {
           .then((res) => {
             console.log(res);
             if (res.data.success == true) {
-              // navigate("/login");
+              navigate("/login");
             }
           })
-          .catch((e) => console.log(e)
-          // setExistedEmail("Tài khoản đã tồn tại")
-          );
+          .catch((e) => setExistedEmail("Tài khoản đã tồn tại"));
       }}
     >
       <Form>
@@ -78,10 +77,10 @@ export default function Registration() {
               </p>
             </div>
             <div className="lg:w-2/6 xl:w-2/5 md:w-2/3 bg-gray-100 rounded-lg p-8 flex flex-col lg:ml-auto w-full mt-10 lg:mt-0">
-              <h2 className="text-gray-900 text-lg font-medium title-font mb-5">
+              <h2 className="text-gray-900 text-lg font-medium title-font mb-5 block text-sm font-semibold">
                 Đăng ký
               </h2>
-              
+
               {existedEmail ? (
                 <div class="ml-3 text-sm font-normal">
                   <svg
@@ -102,12 +101,13 @@ export default function Registration() {
               ) : null}
               <div className="relative mb-4">
                 <label
-                  //   htmlFor="full-name"
-                  className="leading-7 text-sm text-gray-600"
+                  //   htmlFor="full-name"className="block text-sm font-semibold text-gray-800"
+                  className="leading-7 text-sm text-gray-600 block text-sm font-semibold"
                 >
-                  Tên 
+                  Tên
                 </label>
                 <Field
+                  required
                   type="text"
                   name="name"
                   className="w-full bg-white rounded border border-gray-300 focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 text-base outline-none text-gray-700 py-1 px-3 leading-8 transition-colors duration-200 ease-in-out"
@@ -119,7 +119,7 @@ export default function Registration() {
               <div className="relative mb-4">
                 <label
                   htmlFor="full-name"
-                  className="leading-7 text-sm text-gray-600"
+                  className="leading-7 text-sm text-gray-600 block text-sm font-semibold"
                 >
                   Email
                 </label>
@@ -135,7 +135,7 @@ export default function Registration() {
               <div className="relative mb-4">
                 <label
                   htmlFor="email"
-                  className="leading-7 text-sm text-gray-600"
+                  className="leading-7 text-sm text-gray-600 block text-sm font-semibold"
                 >
                   Mật khẩu
                 </label>
@@ -151,7 +151,7 @@ export default function Registration() {
               <div className="relative mb-4">
                 <label
                   htmlFor="email"
-                  className="leading-7 text-sm text-gray-600"
+                  className="leading-7 text-sm text-gray-600 block text-sm font-semibold"
                 >
                   Xác nhận mật khẩu
                 </label>
@@ -171,14 +171,16 @@ export default function Registration() {
               >
                 Button
               </button>
-              <div>
-                <p className="text-xs text-gray-500 mt-3">
-                  Are you have a account ?
-                </p>
-                <Link style={{ color: "blue" }} to="/login">
-                  Log in
-                </Link>
-              </div>
+              <p className="mt-8 text-xs font-light text-center text-gray-700">
+                {" "}
+                Bạn đẫ có tài khoản?{" "}
+                <a
+                  href="/login"
+                  className="font-medium text-purple-600 hover:underline"
+                >
+                  Đăng nhập
+                </a>
+              </p>
             </div>
           </div>
         </section>
