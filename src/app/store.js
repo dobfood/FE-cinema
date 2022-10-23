@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 // import productReducer from './productReducer';
-import showNameUserReducer from "../feauture/showUser/showUser/showNameUser.Slice"
+import showNameUserReducer from "../feauture/showUser/showNameUser.Slice"
 
 const store = configureStore({
     reducer : {

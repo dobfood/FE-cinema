@@ -4,15 +4,14 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
-
-function classNames(...classNamees) {
-  return classNamees.filter(Boolean).join(" ");
+function HomeCss(...homeCss) {
+  return homeCss.filter(Boolean).join(" ");
 }
 export default function Header() {
-  const  showNameUser = useSelector(state =>state.showUser)
-  console.log(showNameUser);
-  
+  const showNameUser = useSelector((state) => state.showUser);
+
   const [current, setCurrent] = useState(false);
   return (
     <Disclosure as="nav" className="bg-gray-800">
@@ -49,7 +48,7 @@ export default function Header() {
                   <div className="flex space-x-4">
                     <Link
                       to="/"
-                      className={classNames(
+                      className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
@@ -66,7 +65,7 @@ export default function Header() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <button
-                      className={classNames(
+                      className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
@@ -82,7 +81,7 @@ export default function Header() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <button
-                      className={classNames(
+                      className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
@@ -97,7 +96,6 @@ export default function Header() {
               </div>
               {/* End Header Right */}
 
-            
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative m4-3">
@@ -127,7 +125,7 @@ export default function Header() {
                         {({ active }) => (
                           <a
                             href=""
-                            className={classNames(
+                            className={HomeCss(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
@@ -141,7 +139,7 @@ export default function Header() {
                         {({ active }) => (
                           <a
                             href=""
-                            className={classNames(
+                            className={HomeCss(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
@@ -155,13 +153,14 @@ export default function Header() {
                 </Menu>
               </div>
               {/* Register, login */}
-              {showNameUser.name}
+              {/* {  console.log('name is header:' + showNameUser) */}
+
               <div className="btn-header">
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <Link
                       to="/register"
-                      className={classNames(
+                      className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
@@ -178,7 +177,7 @@ export default function Header() {
                   <div className="flex space-x-4">
                     <Link
                       to="/login"
-                      className={classNames(
+                      className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
