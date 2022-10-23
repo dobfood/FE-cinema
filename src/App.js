@@ -11,9 +11,9 @@ function App() {
     <>
       <Routes>
         <Route path="/" element={<Master />}>
-          <Route path="/register" element={<Registration />} />
+          <Route path="/dang-ky" element={<Registration />} />
           <Route path="" element={<Sidebar />} />
-          <Route path="/login" element={<Login />} />
+          <Route path="/dang-nhap" element={<Login />} />
           <Route path="/mua-ve/chon-ghe" element={<Seat />} />
         </Route>
       </Routes>

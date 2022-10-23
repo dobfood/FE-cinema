@@ -135,7 +135,7 @@ export default function Login() {
                 {" "}
                 Bạn chưa có tài khoản?{" "}
                 <a
-                  href="/register"
+                  href="/dang-ky"
                   className="font-medium text-purple-600 hover:underline"
                 >
                   Đăng ký

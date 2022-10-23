@@ -50,7 +50,7 @@ export default function Registration() {
           .then((res) => {
             console.log(res);
             if (res.data.success == true) {
-              navigate("/login");
+              navigate("/dang-nhap");
             }
           })
           .catch((e) => setExistedEmail("Email đã tồn tại!"));

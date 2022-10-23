@@ -74,10 +74,26 @@ body {
   box-shadow: 0 3px 10px 2px;
 }
 
+.Cinema .screen .text {
+  color: #222222;
+  transform: rotateX(-30deg) scale(1.1);
+  font-size: x-large;
+  width: 200px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -20px 0px 0px -90px;
+}
+
 .Cinema .seats {
   display: grid;
   grid-gap: 15px;
   grid-template-columns: repeat(15, min-content);
+  align-items: center;
+  margin-bottom: 15;
+}
+.Cinema .alphabets {
+  display: grid;
   align-items: center;
   margin-bottom: 15;
 }
@@ -127,12 +143,11 @@ body {
 .seat {
   display: inline-block;
   background: #626262;
-  width: 26px;
-  height: 20px;
+  width: 40px;
+  height: 25px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   transition: transform 0.3s ease-in-out;
-
   position: relative;
   top: 1px;
 }
@@ -151,4 +166,7 @@ body {
 
 .info .total {
   color: #7bc47f;
+}
+.ShowCase {
+  font-size: large;
 }

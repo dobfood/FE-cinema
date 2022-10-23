@@ -7,11 +7,12 @@
 import "./seat.css";
 import React, { useState } from "react";
 import clsx from "clsx";
+import { Link } from "react-router-dom";
 
 const movies = [
   {
     name: "Avenger",
-    price: 10,
+    price: 70,
     occupied: [20, 21, 30, 1, 2, 8],
   },
   {
@@ -36,102 +37,31 @@ const seats = Array.from({ length: 21 * 5 }, (_, i) => i);
 export default function Seat() {
   const [selectedMovie, setSelectedMovie] = useState(movies[0]);
   const [selectedSeats, setSelectedSeats] = useState([]);
-
-  return (
-    <div className="App">
-      <Movies
-        movie={selectedMovie}
-        onChange={(movie) => {
-          setSelectedSeats([]);
-          setSelectedMovie(movie);
-        }}
-      />
-      <ShowCase />
-      <Cinema
-        movie={selectedMovie}
-        selectedSeats={selectedSeats}
-        onSelectedSeatsChange={(selectedSeats) =>
-          setSelectedSeats(selectedSeats)
-        }
-      />
-
-      <p className="info" style={{ marginBottom: 20 }}>
-        You have selected <span className="count">{selectedSeats.length}</span>{" "}
-        seats for the price of{" "}
-        <span className="total">
-          {selectedSeats.length * selectedMovie.price}$
-        </span>
-      </p>
-    </div>
-  );
-}
-
-function Movies({ movie, onChange }) {
-  return (
-    <div className="Movies">
-      <label htmlFor="movie">Pick a movie</label>
-      <select
-        id="movie"
-        value={movie.name}
-        onChange={(e) => {
-          onChange(movies.find((movie) => movie.name === e.target.value));
-        }}
-      >
-        {movies.map((movie) => (
-          <option key={movie.name} value={movie.name}>
-            {movie.name} (${movie.price})
-          </option>
-        ))}
-      </select>
-    </div>
-  );
-}
-
-function ShowCase() {
-  return (
-    <ul className="ShowCase">
-      <li>
-        <span className="seat" /> <small>N/A</small>
-      </li>
-      <li>
-        <span className="seat selected" /> <small>Selected</small>
-      </li>
-      <li>
-        <span className="seat occupied" /> <small>Occupied</small>
-      </li>
-    </ul>
-  );
-}
-
-function Cinema({ movie, selectedSeats, onSelectedSeatsChange }) {
-  function handleSelectedState(seat) {
-    const isSelected = selectedSeats.includes(seat);
-    if (isSelected) {
-      onSelectedSeatsChange(
-        selectedSeats.filter((selectedSeat) => selectedSeat !== seat)
-      );
-    } else {
-      onSelectedSeatsChange([...selectedSeats, seat]);
+  const [isSelectedSeat, setIsSelectedSeat] = useState(false);
+  function Cinema({ movie, selectedSeats, onSelectedSeatsChange }) {
+    function handleSelectedState(seat) {
+      const isSelected = selectedSeats.includes(seat);
+      if (isSelected) {
+        onSelectedSeatsChange(
+          selectedSeats.filter((selectedSeat) => selectedSeat !== seat)
+        );
+        setIsSelectedSeat(false);
+      } else {
+        onSelectedSeatsChange([...selectedSeats, seat]);
+        setIsSelectedSeat(true);
+      }
     }
-  }
-  const digits = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14];
-  const alphabets = ["A", "B", "C", "D", "E", "G"];
-
-  return (
-    <div className="Cinema">
-      <div className="screen" />
-
-      <div className="seats">
-        {seats.map((seat, key) => {
-          const isSelected = selectedSeats.includes(seat);
-          const isOccupied = movie.occupied.includes(seat);
-          return (
-            <div>
-              {key <= 14 ? (
-                <span style={{ marginBlock: 10 }}>{key + 1}</span>
-              ) : (
-                ""
-              )}
+    
+    return (
+      <div className="Cinema">
+        <div className="screen">
+          <span className="text">Màn hình chiếu</span>
+        </div>
+        <div className="seats">
+          {seats.map((seat, key) => {
+            const isSelected = selectedSeats.includes(seat);
+            const isOccupied = movie.occupied.includes(seat);
+            return (
               <div>
                 <span
                   tabIndex="0"
@@ -151,12 +81,98 @@ function Cinema({ movie, selectedSeats, onSelectedSeatsChange }) {
                           }
                         }
                   }
-                />
+                >
+                  {key + 1}
+                </span>
               </div>
-            </div>
-          );
-        })}
+            );
+          })}
+        </div>
       </div>
+    );
+  }
+  return (
+    <div className="App">
+      {/* <Movies
+        movie={selectedMovie}
+        onChange={(movie) => {
+          setSelectedSeats([]);
+          setSelectedMovie(movie);
+        }}
+      /> */}
+      <ShowCase />
+      <Cinema
+        movie={selectedMovie}
+        selectedSeats={selectedSeats}
+        onSelectedSeatsChange={(selectedSeats) =>
+          setSelectedSeats(selectedSeats)
+        }
+      />
+
+      <p className="info text-lg" style={{ marginBottom: 20 }}>
+        Bạn đã chọn <span className="count">{selectedSeats.length}</span> ghế và
+        tổng tiền cần thanh toán là{" "}
+        <span className="total ">
+          {selectedSeats.length * selectedMovie.price }{isSelectedSeat ? '.000':''} VND
+        </span>
+        {isSelectedSeat ? (
+          <Link to='/mua-ve/thanh-toan'>
+            <button
+            style={{ marginLeft: 10 }}
+            type="button"
+            className="text-lg bg-green-600 hover:bg-green-600 py-2 px-4 text-sm font-medium text-white border border-transparent rounded-lg focus:outline-none"
+          >
+            Thanh toán
+          </button>
+          </Link>
+        ) : (
+          <button
+            style={{ marginLeft: 10 }}
+            disabled
+            type="button"
+            className="text-lg bg-gray-500  py-2 px-4 text-sm font-medium text-white border border-transparent rounded-lg focus:outline-none"
+          >
+           Thanh toán
+          </button>
+        )}
+      </p>
     </div>
+  );
+}
+
+// function Movies({ movie, onChange }) {
+//   return (
+//     <div className="Movies">
+//       <label htmlFor="movie">Pick a movie</label>
+//       <select
+//         id="movie"
+//         value={movie.name}
+//         onChange={(e) => {
+//           onChange(movies.find((movie) => movie.name === e.target.value));
+//         }}
+//       >
+//         {movies.map((movie) => (
+//           <option key={movie.name} value={movie.name}>
+//             {movie.name} (${movie.price})
+//           </option>
+//         ))}
+//       </select>
+//     </div>
+//   );
+// }
+
+function ShowCase() {
+  return (
+    <ul className="ShowCase">
+      <li>
+        <span className="seat" /> <small>N/A</small>
+      </li>
+      <li>
+        <span className="seat selected" /> <small>Đang chọn</small>
+      </li>
+      <li>
+        <span className="seat occupied" /> <small>Đã chọn</small>
+      </li>
+    </ul>
   );
 }

@@ -159,7 +159,7 @@ export default function Header() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <Link
-                      to="/register"
+                      to="/dang-ky"
                       className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
@@ -176,7 +176,7 @@ export default function Header() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <Link
-                      to="/login"
+                      to="/dang-nhap"
                       className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
