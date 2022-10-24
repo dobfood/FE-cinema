@@ -122,7 +122,7 @@ const Detail = () => {
                         </div>
                         <div className="flex-auto grid grid-cols-8 gap-2 place-items-center h-56 ...">
                             <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                <button  className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
                                     10:30
                                 </button>
                             </Link>
