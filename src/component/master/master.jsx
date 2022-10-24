@@ -7,7 +7,6 @@ import MenuBar from "../menu/menu";
 export default function Master() {
   return (
     <>
-      <Header/>
       <MenuBar/>
       <Outlet />
       <Footer />

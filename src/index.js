@@ -5,6 +5,9 @@ import App from "./App";
 import 'tw-elements';
 // import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import { BrowserRouter } from "react-router-dom";
+import "tw-elements";
+
+// import 'mdb-react-ui-kit/dist/css/mdb.min.css'
 import { Provider } from "react-redux";
 import store from "./app/store";
 
@@ -16,6 +19,5 @@ root.render(
       <App />
     </BrowserRouter>
     </Provider>
-  
   </React.StrictMode>
 );

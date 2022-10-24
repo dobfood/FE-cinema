@@ -3,13 +3,19 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { isLogin } from "../../feauture/account/account.slice";
 
-
-function classNames(...classNamees) {
-  return classNamees.filter(Boolean).join(" ");
+function HomeCss(...homeCss) {
+  return homeCss.filter(Boolean).join(" ");
 }
 export default function Header() {
-  const [current, setCurrent] = useState(false)
+  const account = useSelector((state) => {
+    console.log(state);
+    return state.account;
+  });
+const dispatch = useDispatch()
+  const [current, setCurrent] = useState(false);
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -43,31 +49,33 @@ export default function Header() {
                 {/* Text Header */}
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    
-                     
-                    
-                      <Link to="/"  className={classNames(
+                    <Link
+                      to="/"
+                      className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
                         "px-3 py-2 rounded-md text-sm font-medium"
                       )}
-                      aria-current={current ? "page" : undefined}> Trang chủ</Link>
-                    
+                      aria-current={current ? "page" : undefined}
+                    >
+                      {" "}
+                      Trang chủ
+                    </Link>
                   </div>
                 </div>
 
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <button
-                        className={classNames(
+                      className={HomeCss(
                         current
-                            ? "bg-gray-900 text-white"
-                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                          "px-3 py-2 rounded-md text-sm font-medium"
-                        )}
+                          ? "bg-gray-900 text-white"
+                          : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                        "px-3 py-2 rounded-md text-sm font-medium"
+                      )}
                       aria-current={current ? "page" : undefined}
-                      >
+                    >
                       Sản phẩm
                     </button>
                   </div>
@@ -76,7 +84,7 @@ export default function Header() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <button
-                      className={classNames(
+                      className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
                           : "text-gray-300 hover:bg-gray-700 hover:text-white",
@@ -86,33 +94,24 @@ export default function Header() {
                     >
                       Về chúng tôi
                     </button>
-              </div>
+                  </div>
                 </div>
               </div>
-                {/* End Header Right */}
+              {/* End Header Right */}
 
-
-              {/* search */}
-              <div className="relative text-gray-600">
-                <input type="search" name="serch" placeholder="Search" className="bg-white h-10 px-5 pr-5 rounded-full text-sm focus:outline-none" />
-                
-              </div>
-
-              {/*  */}
               <div className="absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-
                 {/* Profile dropdown */}
                 <Menu as="div" className="relative m4-3">
                   <div>
                     <Menu.Button className="flex rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
                       <span className="sr-only">Open user menu</span>
-                <button
-                  type="button"
-                  className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
-                >
-                  <span className="sr-only">View notifications</span>
-                  <BellIcon className="h-6 w-6" aria-hidden="true" />
-                </button>
+                      <button
+                        type="button"
+                        className="rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                      >
+                        <span className="sr-only">View notifications</span>
+                        <BellIcon className="h-6 w-6" aria-hidden="true" />
+                      </button>
                     </Menu.Button>
                   </div>
                   <Transition
@@ -129,7 +128,7 @@ export default function Header() {
                         {({ active }) => (
                           <a
                             href=""
-                            className={classNames(
+                            className={HomeCss(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
@@ -138,12 +137,12 @@ export default function Header() {
                           </a>
                         )}
                       </Menu.Item>
-                     
+
                       <Menu.Item>
                         {({ active }) => (
                           <a
                             href=""
-                            className={classNames(
+                            className={HomeCss(
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
@@ -152,40 +151,84 @@ export default function Header() {
                           </a>
                         )}
                       </Menu.Item>
-
-
                     </Menu.Items>
                   </Transition>
                 </Menu>
               </div>
               {/* Register, login */}
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
-                
-                       <Link to="/register"  className={classNames(
-                      current
-                        ? "bg-gray-900 text-white"
-                        : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "px-3 py-2 rounded-md text-sm font-medium"
-                    )}
-                    aria-current={current ? "page" : undefined}>  Đăng kí</Link>
-                  
-            </div>
-          </div>
-              <div className="hidden sm:ml-6 sm:block">
-                <div className="flex space-x-4">
+              {account.isLogin ? (
+                <div className="flex ml-8">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    strokeWidth={1.5}
+                    stroke="currentColor"
+                    className="w-5 h-5 mr-1 "
+                  >
+                    <path
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z"
+                    />
+                  </svg>
 
-                          <Link to="/login" className={classNames(
-                      current
-                      ? "bg-gray-900 text-white"
-                      : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                      "px-3 py-2 rounded-md text-sm font-medium"
-                  )}
-                    aria-current={current ? "page" : undefined}>  Đăng nhập</Link>
-                          
-                      
-            </div>
-              </div>
+                  <div className="">{account.user.name}</div>
+                  <button onClick={()=>{dispatch(isLogin(false))}}>
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      strokeWidth={1.5}
+                      stroke="currentColor"
+                      className="w-5 h-5 ml-3 hover:bg-gray-1000"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M5.636 5.636a9 9 0 1012.728 0M12 3v9"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              ) : (
+                <div className="btn-header">
+                  <div className="hidden sm:ml-6 sm:block">
+                    <div className="flex space-x-4">
+                      <Link
+                        to="/dang-ky"
+                        className={HomeCss(
+                          current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                        aria-current={current ? "page" : undefined}
+                      >
+                        {" "}
+                        Đăng ký
+                      </Link>
+                    </div>
+                  </div>
+                  <div className="hidden sm:ml-6 sm:block">
+                    <div className="flex space-x-4">
+                      <Link
+                        to="/dang-nhap"
+                        className={HomeCss(
+                          current
+                            ? "bg-gray-900 text-white"
+                            : "text-gray-300 hover:bg-gray-700 hover:text-white",
+                          "px-3 py-2 rounded-md text-sm font-medium"
+                        )}
+                        aria-current={current ? "page" : undefined}
+                      >
+                        {" "}
+                        Đăng nhập
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              )}
               {/* End */}
             </div>
           </div>
