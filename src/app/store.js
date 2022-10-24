@@ -1,15 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
-// import productReducer from './productReducer';
+import reducer from './reducer';
 import accountReducer from "../feauture/account/account.slice"
 import billReducer from "../feauture/account/bill.slice"
-
 const store = configureStore({
     reducer : {
-        // phone : productReducer,
+        movie : reducer,
         account: accountReducer,
         bill: billReducer,
+// import productReducer from './productReducer';
+    }})
 
-    }
-})
-
-export default store;
+export default store
