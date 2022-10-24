@@ -21,6 +21,7 @@ export default function Login() {
     return await axios
       .post("http://localhost:2212/api/auth/signin", data)
       .then((res) => {
+        
         dispatch(accountName(res.data));
         dispatch(isLogin(true));
         navigate('/')
@@ -28,6 +29,7 @@ export default function Login() {
       .catch((e) => dispatch(isLogin(false)));
   };
   return (
+    
     <Formik
       initialValues={{
         email: "",

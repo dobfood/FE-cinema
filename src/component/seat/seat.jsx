@@ -9,29 +9,13 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { sumTotalMoney } from "../../feauture/account/bill.slice";
-
+import { quantity, sumTotalMoney,position } from "../../feauture/account/bill.slice";
 
 const movies = [
   {
     name: "Avenger",
     price: 70,
-    occupied: [20, 21, 30, 1, 2, 8 ,60,75,49,59,75,76],
-  },
-  {
-    name: "Joker",
-    price: 12,
-    occupied: [9, 41, 35, 11, 65, 26],
-  },
-  {
-    name: "Toy story",
-    price: 8,
-    occupied: [37, 25, 44, 13, 2, 3],
-  },
-  {
-    name: "the lion king",
-    price: 9,
-    occupied: [10, 12, 50, 33, 28, 47],
+    occupied: [20, 21, 30, 1, 2, 8, 60, 75, 49, 59, 75, 76],
   },
 ];
 
@@ -42,10 +26,11 @@ export default function Seat() {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [isSelectedSeat, setIsSelectedSeat] = useState(false);
   const totalMoney = selectedSeats.length * selectedMovie.price;
+  const totalQuantity = selectedSeats.length;
   const dispatch = useDispatch();
 
   function Cinema({ movie, selectedSeats, onSelectedSeatsChange }) {
-    function handleSelectedState(seat) {
+    function handleSelectedState(seat,key) {
       const isSelected = selectedSeats.includes(seat);
       if (isSelected) {
         onSelectedSeatsChange(
@@ -56,8 +41,9 @@ export default function Seat() {
         onSelectedSeatsChange([...selectedSeats, seat]);
         setIsSelectedSeat(true);
       }
+      dispatch(position(1))
     }
-    
+
     return (
       <div className="Cinema">
         <div className="screen">
@@ -74,16 +60,17 @@ export default function Seat() {
                   key={seat}
                   className={clsx(
                     "seat",
-                    isSelected && "selected", 
+                    isSelected && "selected",
                     isOccupied && "occupied"
                   )}
-                  onClick={isOccupied ? null : () => handleSelectedState(seat)}
+                  onClick={isOccupied ? null : () => handleSelectedState(seat,key)
+                  }
                   onKeyPress={
                     isOccupied
                       ? null
                       : (e) => {
                           if (e.key === "Enter") {
-                            handleSelectedState(seat);
+                            handleSelectedState(seat,key);
                           }
                         }
                   }
@@ -100,7 +87,6 @@ export default function Seat() {
 
   return (
     <div className="App">
-     
       <ShowCase />
       <Cinema
         movie={selectedMovie}
@@ -111,21 +97,25 @@ export default function Seat() {
       />
 
       <p className="info text-lg" style={{ marginBottom: 20 }}>
-        Bạn đã chọn <span className="count">{selectedSeats.length}</span> ghế và
-        tổng tiền cần thanh toán là{" "}
+        Bạn đã chọn <span className="count">{totalQuantity}</span> ghế và tổng
+        tiền cần thanh toán là{" "}
         <span className="total ">
-          {totalMoney }{isSelectedSeat ? '.000':''} VND
+          {totalMoney}.000
+           VND
         </span>
         {isSelectedSeat ? (
-          <Link to='/mua-ve/thanh-toan'>
+          <Link to="/mua-ve/thanh-toan">
             <button
-            onClick={()=>{dispatch(sumTotalMoney(totalMoney))}}
-            style={{ marginLeft: 10 }}
-            type="button"
-            className="text-lg bg-green-600 hover:bg-green-600 py-2 px-4 text-sm font-medium text-white border border-transparent rounded-lg focus:outline-none"
-          >
-            Thanh toán
-          </button>
+              onClick={() => {
+                dispatch(quantity(totalQuantity));
+                dispatch(sumTotalMoney(totalMoney));
+              }}
+              style={{ marginLeft: 10 }}
+              type="button"
+              className="text-lg bg-green-600 hover:bg-green-600 py-2 px-4 text-sm font-medium text-white border border-transparent rounded-lg focus:outline-none"
+            >
+              Thanh toán
+            </button>
           </Link>
         ) : (
           <button
@@ -134,7 +124,7 @@ export default function Seat() {
             type="button"
             className="text-lg bg-gray-500  py-2 px-4 text-sm font-medium text-white border border-transparent rounded-lg focus:outline-none"
           >
-           Thanh toán
+            Thanh toán
           </button>
         )}
       </p>
