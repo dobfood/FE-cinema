@@ -34,7 +34,7 @@ export default function MenuBar() {
 
 
 
-                                        <Link to="/" className={classNames(
+                                        <Link to="/mua-ve/chon-ghe" className={classNames(
                                             current
                                                 ? "bg-gray-900 text-white"
                                                 : "text-gray-300 hover:bg-gray-700 hover:text-white",
