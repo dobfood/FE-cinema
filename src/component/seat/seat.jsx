@@ -8,6 +8,9 @@ import "./seat.css";
 import React, { useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { sumTotalMoney } from "../../feauture/account/bill.slice";
+
 
 const movies = [
   {
@@ -38,6 +41,9 @@ export default function Seat() {
   const [selectedMovie, setSelectedMovie] = useState(movies[0]);
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [isSelectedSeat, setIsSelectedSeat] = useState(false);
+  const totalMoney = selectedSeats.length * selectedMovie.price;
+  const dispatch = useDispatch();
+
   function Cinema({ movie, selectedSeats, onSelectedSeatsChange }) {
     function handleSelectedState(seat) {
       const isSelected = selectedSeats.includes(seat);
@@ -91,15 +97,10 @@ export default function Seat() {
       </div>
     );
   }
+
   return (
     <div className="App">
-      {/* <Movies
-        movie={selectedMovie}
-        onChange={(movie) => {
-          setSelectedSeats([]);
-          setSelectedMovie(movie);
-        }}
-      /> */}
+     
       <ShowCase />
       <Cinema
         movie={selectedMovie}
@@ -113,11 +114,12 @@ export default function Seat() {
         Bạn đã chọn <span className="count">{selectedSeats.length}</span> ghế và
         tổng tiền cần thanh toán là{" "}
         <span className="total ">
-          {selectedSeats.length * selectedMovie.price }{isSelectedSeat ? '.000':''} VND
+          {totalMoney }{isSelectedSeat ? '.000':''} VND
         </span>
         {isSelectedSeat ? (
           <Link to='/mua-ve/thanh-toan'>
             <button
+            onClick={()=>{dispatch(sumTotalMoney(totalMoney))}}
             style={{ marginLeft: 10 }}
             type="button"
             className="text-lg bg-green-600 hover:bg-green-600 py-2 px-4 text-sm font-medium text-white border border-transparent rounded-lg focus:outline-none"

@@ -4,7 +4,6 @@ import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import axios from "axios";
 import { isLogin } from "../../feauture/account/account.slice";
 
 function HomeCss(...homeCss) {

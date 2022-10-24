@@ -1,8 +1,16 @@
+import { useSelector } from "react-redux";
+
 export default function Invoice() {
+  const account = useSelector((state) => {
+    return state.account;
+  });
+  const totalMoney = useSelector((state) => {
+    return state.bill;
+  });
   return (
-    <div>
+    <div class="justify-center items-center ">
       <div class="flex justify-center items-center w-screen h-screen bg-white">
-        <div class="container mx-auto my-4 px-4 lg:px-20">
+        <div class="container mx-auto my-8 px-8 lg:px-40 ">
           <div class="w-full p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl">
             <div class="flex">
               <h4 class="font-bold uppercase text-3xl text-amber-600">
@@ -14,30 +22,34 @@ export default function Invoice() {
                 class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 type="text"
                 placeholder="First Name*"
+                value={account.user.name}
               />
-              <input
-                class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                type="text"
-                placeholder="Last Name*"
-              />
+
               <input
                 class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                 type="email"
                 placeholder="Email*"
+                value={account.user.email}
               />
               <input
                 class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-                type="number"
+                type="string"
                 placeholder="Phone*"
               />
             </div>
             <div class="my-4">
-              <textarea
+              <select
                 placeholder="Message*"
-                class="w-full h-32 bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
-              ></textarea>
+                class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
+              >
+                <option>Thanh toán bằng momo</option>
+                <option>Thanh toán bằng zaloPay</option>
+                <option>Thanh toán bằng thẻ tín dụng</option>
+              </select>
             </div>
-            <div class="my-2 w-1/2 lg:w-1/4 flex ml-72">
+            <div class="my-2 w-1/2 lg:w-2/4 flex ml-80">
+            <h2 style={{color:"black" }}>Tổng:{totalMoney.totalMoney} </h2>
+
               <button
                 class="uppercase text-sm font-bold tracking-wide bg-blue-700 text-gray-100 p-3 rounded-lg w-full mx-5
                             hover:bg-blue-600 active:bg-blue-600  focus:ring-blue-300"
@@ -45,31 +57,16 @@ export default function Invoice() {
                 Quay lại
               </button>
               <button
-                class="uppercase text-sm font-bold tracking-wide bg-orange-700 text-gray-100 p-3 rounded-lg w-full 
+                class="uppercase text-sm font-bold tracking-wide bg-orange-700 text-gray-100 p-3 rounded-lg w-full
                           focus:outline-none focus:shadow-outline  hover:bg-orange-600 active:bg-orange-600  focus:ring-orange-300"
               >
                 Thanh toán
               </button>
+
             </div>
           </div>
         </div>
       </div>
-
-      {/* <div class="flex items-end justify-end fixed bottom-0 right-0 mb-4 mr-4 z-10">
-        <div>
-          <a
-            title="Buy me a pizza"
-            href="https://www.buymeacoffee.com/Dekartmc"
-            target="_blank"
-            class="block w-16 h-16 rounded-full transition-all shadow hover:shadow-lg transform hover:scale-110 hover:rotate-12"
-          >
-            <img
-              class="object-cover object-center w-full h-full rounded-full"
-              src="https://img.icons8.com/emoji/48/000000/pizza-emoji.png"
-            />
-          </a>
-        </div>
-      </div> */}
     </div>
   );
 }

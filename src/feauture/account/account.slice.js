@@ -9,11 +9,12 @@ const accountSlice = createSlice({
   },
   reducers: {
     accountName: (state, action) => {
-      state.user.name = action.payload;
+      state.user = action.payload;
     },
     isLogin :(state,action) =>{
       state.isLogin = action.payload
     }
+
   },
 });
 
