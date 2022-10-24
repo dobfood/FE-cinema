@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import axios from "axios";
 import * as Yup from "yup";
 import bcrypt from "bcryptjs";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { showNameUser } from "../../feauture/showUser/showNameUser.Slice";
+import { accountName, isLogin } from "../../feauture/account/account.slice";
 
 const RegisterSchema = Yup.object().shape({
   email: Yup.string().required("Bắt buộc!"),
@@ -13,23 +13,20 @@ const RegisterSchema = Yup.object().shape({
 });
 
 export default function Login() {
-  const [showName, setShowName] = useState({
-    name:''
-  });
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [existedEmail, setExistedEmail] = useState("");
-  console.log(showName);
 
   const handleLogin = async (data) => {
     return await axios
       .post("http://localhost:2212/api/auth/signin", data)
       .then((res) => {
-        setShowName(res.data.name);
-        dispatch(showNameUser(showName))
+        dispatch(accountName(res.data.name));
+        dispatch(isLogin(true));
+        navigate('/')
       })
-      .catch((e) => console.log(e));
+      .catch((e) => dispatch(isLogin(false)));
   };
-  const navigate = useNavigate();
   return (
     <Formik
       initialValues={{

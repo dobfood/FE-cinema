@@ -13,7 +13,7 @@ const movies = [
   {
     name: "Avenger",
     price: 70,
-    occupied: [20, 21, 30, 1, 2, 8],
+    occupied: [20, 21, 30, 1, 2, 8 ,60,75,49,59,75,76],
   },
   {
     name: "Joker",
@@ -32,7 +32,7 @@ const movies = [
   },
 ];
 
-const seats = Array.from({ length: 21 * 5 }, (_, i) => i);
+const seats = Array.from({ length: 7 * 5 }, (_, i) => i);
 
 export default function Seat() {
   const [selectedMovie, setSelectedMovie] = useState(movies[0]);
@@ -68,7 +68,7 @@ export default function Seat() {
                   key={seat}
                   className={clsx(
                     "seat",
-                    isSelected && "selected",
+                    isSelected && "selected", 
                     isOccupied && "occupied"
                   )}
                   onClick={isOccupied ? null : () => handleSelectedState(seat)}
@@ -165,13 +165,13 @@ function ShowCase() {
   return (
     <ul className="ShowCase">
       <li>
-        <span className="seat" /> <small>N/A</small>
+        <span className="seat" /> <small>Có thể chọn</small>
       </li>
       <li>
-        <span className="seat selected" /> <small>Đang chọn</small>
+        <span className="seat selected" /> <small>Ghế đang chọn</small>
       </li>
       <li>
-        <span className="seat occupied" /> <small>Đã chọn</small>
+        <span className="seat occupied" /> <small>Ghế đã bán</small>
       </li>
     </ul>
   );

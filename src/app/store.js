@@ -1,11 +1,11 @@
 import { configureStore } from '@reduxjs/toolkit';
 // import productReducer from './productReducer';
-import showNameUserReducer from "../feauture/showUser/showNameUser.Slice"
+import accountReducer from "../feauture/account/account.slice"
 
 const store = configureStore({
     reducer : {
         // phone : productReducer,
-        showUser: showNameUserReducer,
+        account: accountReducer
     }
 })
 
