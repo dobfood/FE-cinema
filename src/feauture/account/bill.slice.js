@@ -14,7 +14,7 @@ const bills = createSlice({
     quantity: (state, action) => {
       state.quantity = action.payload;
     },
-    seat: (state, action) => {
+    position: (state, action) => {
       console.log(action.payload);
       state.position.push(action.payload);
     },

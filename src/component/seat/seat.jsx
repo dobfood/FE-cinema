@@ -9,7 +9,11 @@ import React, { useState } from "react";
 import clsx from "clsx";
 import { Link } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { quantity, sumTotalMoney,position } from "../../feauture/account/bill.slice";
+import {
+  quantity,
+  sumTotalMoney,
+  position,
+} from "../../feauture/account/bill.slice";
 
 const movies = [
   {
@@ -30,7 +34,9 @@ export default function Seat() {
   const dispatch = useDispatch();
 
   function Cinema({ movie, selectedSeats, onSelectedSeatsChange }) {
-    function handleSelectedState(seat,key) {
+    const [seated, setSeated] = useState();
+    console.log(seated);
+    function handleSelectedState(seat, key) {
       const isSelected = selectedSeats.includes(seat);
       if (isSelected) {
         onSelectedSeatsChange(
@@ -41,7 +47,7 @@ export default function Seat() {
         onSelectedSeatsChange([...selectedSeats, seat]);
         setIsSelectedSeat(true);
       }
-      dispatch(position(1))
+      dispatch(position(key+1))
     }
 
     return (
@@ -63,14 +69,19 @@ export default function Seat() {
                     isSelected && "selected",
                     isOccupied && "occupied"
                   )}
-                  onClick={isOccupied ? null : () => handleSelectedState(seat,key)
+                  onClick={
+                    isOccupied
+                      ? null
+                      : () => {
+                          handleSelectedState(seat, key);
+                        }
                   }
                   onKeyPress={
                     isOccupied
                       ? null
                       : (e) => {
                           if (e.key === "Enter") {
-                            handleSelectedState(seat,key);
+                            handleSelectedState(key, seat);
                           }
                         }
                   }
@@ -99,10 +110,7 @@ export default function Seat() {
       <p className="info text-lg" style={{ marginBottom: 20 }}>
         Bạn đã chọn <span className="count">{totalQuantity}</span> ghế và tổng
         tiền cần thanh toán là{" "}
-        <span className="total ">
-          {totalMoney}.000
-           VND
-        </span>
+        <span className="total ">{totalMoney}.000 VND</span>
         {isSelectedSeat ? (
           <Link to="/mua-ve/thanh-toan">
             <button
