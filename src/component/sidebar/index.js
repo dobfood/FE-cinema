@@ -1,98 +1,43 @@
-import {useDispatch, useSelector} from 'react-redux'
-import { useState } from 'react';
-import { searchFillterChange } from '../../app/produckReducer';
+import { useDispatch, useSelector } from 'react-redux'
+import { useEffect, useState } from 'react';
 
+import axios from 'axios';
+import { Link, useNavigate } from "react-router-dom";
+import { searchFillterChange } from '../../app/reducer';
 
 
 export default function Sidebar() {
- const products = [
-    {
-      id: 1,
-      name: 'Basic Tee',
-      href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: '$35',
-      color: 'Black',
-    },
-    {
-      id: 2,
-      name: 'Basic Tee',
-      href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: '$35',
-      color: 'Black',
-    }, {
-      id: 3,
-      name: 'Basic Tee',
-      href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: '$35',
-      color: 'Black',
-    }, {
-      id: 4,
-      name: 'Basic Tee',
-      href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: '$35',
-      color: 'Black',
-    }, {
-      id: 5,
-      name: 'Basic Tee',
-      href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: '$35',
-      color: 'Black',
-    }, {
-      id: 6,
-      name: 'Basic Tee',
-      href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: '$35',
-      color: 'Black',
-    }, {
-      id: 7,
-      name: 'Basic Tee',
-      href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: '$35',
-      color: 'Black',
-    }, {
-      id: 8,
-      name: 'Basic Tee',
-      href: '#',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-page-01-related-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
-      price: '$35',
-      color: 'Black',
-    },
-  ]  ;
+  const navigate = useNavigate();
+  const productListSearch = useSelector((item) => item.movie.fillter.search);
   const [state,setState] = useState('')
-  //  const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-//    const productSearch = useSelector(state => {
-//     const search1 = state.movie.products.filter((item)=> {
-//         return item.name.includes(state.movie.fillter.search)
-//     })
-//         return search1
-// }) 
+     const productSearch = useSelector(item => {
+      const search1 = item.movie.product.filter((item)=> {
+          return item.name.includes( productListSearch )
+      })
+          return search1
+  }) 
+  // console.log(productSearch)
 
-// const handleSearch = (e) => {
-//   setState(
-//    e.target.value
-//   )
+  // const handleSearch = (e) => {
+  //   setState(
+  //    e.target.value
+  //   )
+  // }
+  // console.log(state)
+
+  const handleChangeSearch = (e) => {
+    dispatch(searchFillterChange(e.target.value))
+}
+
+// const handleDetails = (product) => {
+//   const detailProduct = product.name.replace(/\s/g,"-")
+//   navigate(`/chi-tiet/:${detailProduct}`)
 // }
-console.log(state)
-
-
   return (
     <>
+
       <div id="carouselExampleCaptions" className="carousel slide relative" data-bs-ride="carousel">
         <div className="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
           <button
@@ -117,6 +62,7 @@ console.log(state)
           ></button>
         </div>
         <div className="carousel-inner relative w-full overflow-hidden">
+
           <div className="carousel-item active relative float-left w-full">
             <img
               src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
@@ -210,26 +156,26 @@ console.log(state)
             </div>
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-zip">
-                Số ghế : 
+                Số ghế :
               </label>
-              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text"  />
+              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" />
             </div>
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-zip">
                 Zip
               </label>
-              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text"  />
+              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" />
             </div>
             <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
               <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-zip">
                 Số điện thoại
               </label>
-              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text"  />
+              <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="grid-zip" type="text" />
             </div>
           </div>
           <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-Mua vé
-</button>
+            Mua vé
+          </button>
 
         </form>
       </div>
@@ -240,35 +186,47 @@ Mua vé
         <div className="flex-grow border-t border-gray-600"></div>
       </div>
       {/* Search */}
-      <div className="relative text-gray-600">
-                <input type="search" name="search" placeholder="Search" className="bg-white h-10 px-5 pr-5 rounded-full text-sm focus:outline-none" />    
-              </div>
+      <form>   
+    <label for="default-search" class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300">Search</label>
+    <div class="relative">
+        <div class="flex absolute inset-y-0 left-0 items-center pl-3 pointer-events-none">
+            <svg aria-hidden="true" class="w-5 h-5 text-gray-500 dark:text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+        </div>
+        <input onChange={handleChangeSearch} type="search" id="default-search" class="block p-4 pl-10 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search movies ....." required/>
+       
+    </div>
+</form>
       {/* Product */}
       <div className="bg-white">
         <div >
-          <h2 className="text-2xl font-bold tracking-tight text-gray-900">Customers also purchased</h2>
+    
 
           <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
-            {products.map((product) => (
+            {productSearch.map((product) => (
               <div key={product.id} className="group relative">
-                <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80 ">
+                  <span className='items-center justify-center absolute my-36  ml-28 z-50 ' >
+                  <p className='bg-orange-600 opacity-0 group-hover:opacity-100 ml-5 text-center'>{product.Age}</p>
+                    <Link to={`/chi-tiet/${product.id}`} type='submit'  class=" opacity-0 group-hover:opacity-100 text-white font-bold py-2 px-4 border border-black-700 rounded" >
+                     Mua vé 
+                    </Link>
+                  </span >
                   <img
                     src={product.imageSrc}
-                    alt={product.imageAlt}
-                    className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                    alt={product.imageSrc}
+                    className="h-full w-full object-cover object-center lg:h-full lg:w-full group-hover:opacity-75"
                   />
                 </div>
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <a href={product.href}>
+                      <Link to='chi-tiet'>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {product.name}
-                      </a>
+                      </Link>
                     </h3>
-                    <p className="mt-1 text-sm text-gray-500">{product.color}</p>
+                    <p className="mt-1 text-sm text-gray-500">{product.engname}</p>
                   </div>
-                  <p className="text-sm font-medium text-gray-900">{product.price}</p>
                 </div>
               </div>
             ))}
