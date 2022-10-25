@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-import { searchFillterChange } from "../../app/reducer";
+import { getMovieDetail, searchFillterChange } from "../../app/reducer";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ export default function Sidebar() {
     <>
       <div
         id="carouselExampleCaptions"
-        className="carousel slide relative"
+        className="carousel slide relative "
         data-bs-ride="carousel"
       >
         <div className="carousel-indicators absolute right-0 bottom-0 left-0 flex justify-center p-0 mb-4">
@@ -294,7 +294,9 @@ export default function Sidebar() {
                       {product.Age}
                     </p>
                     <Link
-                    onClick={()=>{}}
+                      onClick={() => {
+                        dispatch(getMovieDetail(product.id));
+                      }}
                       to={`/chi-tiet/${product.id}`}
                       // type="submit"
                       class=" opacity-0 group-hover:opacity-100 text-white font-bold py-2 px-4 border border-black-700 rounded"
@@ -311,7 +313,12 @@ export default function Sidebar() {
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <Link to="chi-tiet">
+                      <Link
+                        to={`/chi-tiet/${product.id}`}
+                        onClick={() => {
+                          dispatch(getMovieDetail(product.id));
+                        }}
+                      >
                         <span aria-hidden="true" className="absolute inset-0" />
                         {product.name}
                       </Link>
