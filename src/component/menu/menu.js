@@ -3,11 +3,16 @@ import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, BellIcon, XMarkIcon } from "@heroicons/react/24/outline";
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { getMovieDetail, getProDuct } from "../../app/reducer";
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(" ");
 }
 export default function MenuBar() {
+    const product = useSelector(item => item.movie.product)
+    console.log(product)
+    const dispatch = useDispatch();
     const [current, setCurrent] = useState(false)
     return (
         <Disclosure as="nav" className="bg-blue-800">
@@ -29,21 +34,7 @@ export default function MenuBar() {
                             <div className="flex flex-1" style={{ justifyContent: 'center' }}>
 
                                 {/* Text Header */}
-                                <div className="hidden sm:ml-6 sm:block">
-                                    <div className="flex space-x-4">
 
-
-
-                                        <Link to="/mua-ve/chon-ghe" className={classNames(
-                                            current
-                                                ? "bg-gray-900 text-white"
-                                                : "text-gray-300 hover:bg-gray-700 hover:text-white",
-                                            "px-3 py-2 rounded-md text-sm font-medium"
-                                        )}
-                                            aria-current={current ? "page" : undefined}> MUA VÉ</Link>
-
-                                    </div>
-                                </div>
                                 {/* Menu */}
                                 <Menu as="div" className="relative m4-3">
                                     <div>
@@ -58,6 +49,7 @@ export default function MenuBar() {
                                                                     ? "bg-gray-900 text-white"
                                                                     : "text-gray-300 hover:bg-gray-700 hover:text-white",
                                                                 "px-3 py-2 rounded-md text-sm font-medium"
+
                                                             )}
                                                             aria-current={current ? "page" : undefined}
                                                         >
@@ -78,52 +70,33 @@ export default function MenuBar() {
                                         leaveFrom="transform opacity-100 scale-100"
                                         leaveTo="transform opacity-0 scale-95"
                                     >
-                                        <Menu.Items className="absolute right-0 z-10 mt-2 w-48 origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-non ">
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <Link
-                                                        to="/"
-                                                        className={classNames(
-                                                            active ? "bg-gray-100" : "",
-                                                            "block px-4 py-2 text-sm text-gray-700"
-                                                        )}
-                                                    >
-                                                        Phim 1
-                                                        <img src="https://photo-cms-sggp.zadn.vn/w580/Uploaded/2022/bsugpivp/2020_09_04/sggpphim_zptr.jpg" alt=""/>
-                                                    </Link>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <Link
-                                                        to="/"
-                                                        className={classNames(
-                                                            active ? "bg-gray-100" : "",
-                                                            "block px-4 py-2 text-sm text-gray-700"
-                                                        )}
-                                                    >
-                                                        Phim 2
-                                                        <img src="https://photo-cms-sggp.zadn.vn/w580/Uploaded/2022/bsugpivp/2020_09_04/sggpphim_zptr.jpg" alt=""/>
-                                                    </Link>
-                                                )}
-                                            </Menu.Item>
-                                            <Menu.Item>
-                                                {({ active }) => (
-                                                    <Link
-                                                        to="/"
-                                                        className={classNames(
-                                                            active ? "bg-gray-100" : "",
-                                                            "block px-4 py-2 text-sm text-gray-700"
-                                                        )}
-                                                    >
-                                                        Phim 3
-                                                        <img src="https://photo-cms-sggp.zadn.vn/w580/Uploaded/2022/bsugpivp/2020_09_04/sggpphim_zptr.jpg" alt=""/>
-                                                    </Link>
-                                                )}
-                                            </Menu.Item>
-                                            
+                                        <Menu.Items className="absolute left-12 w-full z-40 mt-2 w-auto origin-top-right rounded-md bg-white py-1 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-non  flex">
+                                            {product.map(item => (
+                                                <Menu.Item>
+                                                    {({ active }) => (
+                                                        <Link
+                                                        to={`/chi-tiet/${item.id}`}
+                                                            className={classNames(
+                                                                active ? "bg-gray-100" : "",
+                                                                "block px-4 py-2 text-sm text-gray-700"
+                                                            )}
+                                                            onClick={() => {
+                                                                dispatch(getMovieDetail(item.id));
+                                                              }} 
+                                                        >
+                                                          
+                                                            <img className="w-50  h-2/6" src={item.imageSrc}
+                                                                alt={item.imageSrc} />
+                                                                  <div className="text-3xl">
+                                                            {item.name}
+                                                            </div>
+                                                        </Link>
+                                                    )}
+                                                </Menu.Item>
+                                            ))}
+
                                         </Menu.Items>
-                                        
+
                                     </Transition>
                                 </Menu>
 
