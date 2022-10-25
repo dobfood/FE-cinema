@@ -285,10 +285,10 @@ export default function Sidebar() {
       {/* Product */}
       <div className="bg-white">
         <div>
-          <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          <div className="mt-6 grid grid-cols-1 gap-y-20 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {productSearch.map((product) => (
-              <div key={product.id} className="group relative">
-                <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80 ">
+              <div key={product.id} className=" group relative ">
+                <div className="min-h-80 aspect-w-1 aspect-h-1 overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80 ">
                   <span className="items-center justify-center absolute my-36  ml-28 z-50 ">
                     <p className="bg-orange-600 opacity-0 group-hover:opacity-100 ml-5 text-center mb-5 mr-2">
                       {product.Age}
@@ -310,9 +310,11 @@ export default function Sidebar() {
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full group-hover:opacity-75"
                   />
                 </div>
+               
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
+                      
                       <Link
                         to={`/chi-tiet/${product.id}`}
                         onClick={() => {

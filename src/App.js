@@ -9,6 +9,7 @@ import Seat from "./component/seat/seat";
 import Invoice from "./component/invoice/invoice";
 import Header from "./component/header/header";
 import MenuBar from "./component/menu/menu";
+import Footer from "./component/footer/footer";
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/mua-ve/thanh-toan" element={<Invoice />} />
         </Route>
       </Routes>
+      <Footer />
     </>
   );
 }
