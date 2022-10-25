@@ -65,7 +65,8 @@ const initValue = {
     fillter : {
         search : '',
         priority : []
-    }
+    },
+    productDetail: []
 };
 const productSlice = createSlice({
 name : "movie",
@@ -88,9 +89,17 @@ reducers : {
     
     searchFillterChange(state,action) {
        state.fillter.search = action.payload
+    },
+
+    getProductDetail(state, action) {
+      state.productDetail = state.product.filter(item => {
+        return item.id === action.payload
+      })
+      console.log(action.payload);
     }
+    
 }
 })
 
-export const {addToCart,deleteProDuct,deleteItemCart,searchFillterChange} = productSlice.actions
+export const {addToCart,deleteProDuct,deleteItemCart,searchFillterChange, getProductDetail} = productSlice.actions
 export default productSlice.reducer

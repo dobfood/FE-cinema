@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 
 import axios from 'axios';
 import { Link, useNavigate } from "react-router-dom";
-import { searchFillterChange } from '../../app/reducer';
+import { getProductDetail, searchFillterChange } from '../../app/reducer';
 
 
 export default function Sidebar() {
@@ -65,7 +65,7 @@ export default function Sidebar() {
 
           <div className="carousel-item active relative float-left w-full">
             <img
-              src="https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg"
+              src="https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/9/8/980x448__4.jpg"
               className="block w-full"
               alt="..."
             />
@@ -76,7 +76,7 @@ export default function Sidebar() {
           </div>
           <div className="carousel-item relative float-left w-full">
             <img
-              src="https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg"
+              src="https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/9/8/980_x_448__1__2.jpg"
               className="block w-full"
               alt="..."
             />
@@ -88,7 +88,7 @@ export default function Sidebar() {
           <div className="carousel-item relative float-left w-full">
 
             <img
-              src="https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg"
+              src="https://www.cgv.vn/media/banner/cache/1/b58515f018eb873dafa430b6f9ae0c1e/a/w/aw-980x448.jpg"
               className="block w-full"
               alt="..."
             />
@@ -207,7 +207,7 @@ export default function Sidebar() {
                 <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80 ">
                   <span className='items-center justify-center absolute my-36  ml-28 z-50 ' >
                   <p className='bg-orange-600 opacity-0 group-hover:opacity-100 ml-5 text-center'>{product.Age}</p>
-                    <Link to={`/chi-tiet/${product.id}`} type='submit'  class=" opacity-0 group-hover:opacity-100 text-white font-bold py-2 px-4 border border-black-700 rounded" >
+                    <Link to={`/chi-tiet/${product.id}`} type='submit' onClick={() => dispatch(getProductDetail(product.id))}  class=" opacity-0 group-hover:opacity-100 text-white font-bold py-2 px-4 border border-black-700 rounded" >
                      Mua vé 
                     </Link>
                   </span >
