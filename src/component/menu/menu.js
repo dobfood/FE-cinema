@@ -11,7 +11,7 @@ function classNames(...classes) {
 }
 export default function MenuBar() {
     const product = useSelector(item => item.movie.product)
-    console.log(product)
+    
     const dispatch = useDispatch();
     const [current, setCurrent] = useState(false)
     return (

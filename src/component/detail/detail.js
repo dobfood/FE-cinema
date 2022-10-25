@@ -2,21 +2,15 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
 const Detail = () => {
+
     const [show, setShow] = useState(false);
     const [show2, setShow2] = useState(false);
-
+    const account = useSelector((state) => {
+    
+    return state.account.isLogin;
+  });
     const movieDetail = useSelector(item => item.movie.productDetail)
-    // const [product1, setProduct1] = useSelector(item => item.movie.product.id)
-    // console.log(product1)
-    // const [products, setProducts]= useState({})
-    // const productFilter = useSelector(item => {
-        // const filter = item.movie.product.filter((item)=> {
-        //     console.log(item.movie.product)
-        //     return item.id.includes(productID)
-        // })
-        // return filter
-    // })
-    // console.log(productFilter)
+
     return (
         <>
 
@@ -113,7 +107,7 @@ const Detail = () => {
                         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-4 ">
                             <div class="bg text-green-800 text-lg font-bold text-center  p-5 rounded-lg">2D -  Phụ đề</div>
                         </div>
-                        <div className="flex-auto grid grid-cols-8 gap-2 place-items-center h-56 ...">
+                        { (account) ?  <div className="flex-auto grid grid-cols-8 gap-2 place-items-center h-56 ...">
                             <Link to='/mua-ve/chon-ghe' >
                                 <button  className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
                                     10:30
@@ -200,7 +194,9 @@ const Detail = () => {
                                     22:30
                                 </button>
                             </Link>
-                        </div>
+                        </div> 
+                          : <h1  className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg"> Bạn chưa đăng nhập, vui lòng bấm vào <Link to='/dang-nhap' className="bg-white text-green-800 text-lg font-bold text-center p-2 rounded-lg">đây</Link> để đăng nhâp!</h1>}
+                     
                     </div>
                 </form>
                 <form className="w-full max-w-lg...">
@@ -212,94 +208,96 @@ const Detail = () => {
                         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-1 gap-4 ">
                             <div class="bg text-green-800 text-lg font-bold text-center  p-5 rounded-lg">2D -  Phụ đề</div>
                         </div>
+                        {(account) ?   
                         <div className="flex-auto grid grid-cols-8 gap-5 place-items-center h-56 ...">
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    10:30
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    11:15
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    12:00
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    12:45
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    13:30
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    14:15
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    15:00
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    15:45
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    16:30
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                10:30
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                11:15
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                12:00
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                12:45
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                13:30
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                14:15
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                15:00
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                15:45
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                16:30
 
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    17:15
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    18:00
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    19:00
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    19:45
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    20:15
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    21:15
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    22:00
-                                </button>
-                            </Link>
-                            <Link to='/mua-ve/chon-ghe' >
-                                <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
-                                    22:30
-                                </button>
-                            </Link>
-                        </div>
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                17:15
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                18:00
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                19:00
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                19:45
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                20:15
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                21:15
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                22:00
+                            </button>
+                        </Link>
+                        <Link to='/mua-ve/chon-ghe' >
+                            <button className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg">
+                                22:30
+                            </button>
+                        </Link>
+                    </div>
+                        : <h1  className="bg-green-300 text-green-800 text-lg font-bold text-center p-2 rounded-lg"> Bạn chưa đăng nhập, vui lòng bấm vào <Link to='/dang-nhap' className="bg-white text-green-800 text-lg font-bold text-center p-2 rounded-lg">đây</Link> để đăng nhâp!</h1>}
                     </div>
                 </form>
             </div>

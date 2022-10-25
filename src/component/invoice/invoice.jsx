@@ -10,7 +10,7 @@ export default function Invoice() {
     return state.bill;
   });
   const movieDetail = useSelector((item) => {
-    console.log(item.movie.product);
+    // console.log(item.movie.product);
     // return item.movie.product;
   });
 

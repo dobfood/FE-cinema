@@ -11,7 +11,6 @@ function HomeCss(...homeCss) {
 }
 export default function Header() {
   const account = useSelector((state) => {
-    console.log(state);
     return state.account;
   });
 const dispatch = useDispatch()
@@ -83,7 +82,8 @@ const dispatch = useDispatch()
 
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    <button
+                    <Link
+                     to="gioi-thieu"
                       className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
@@ -93,7 +93,7 @@ const dispatch = useDispatch()
                       aria-current={current ? "page" : undefined}
                     >
                       Về chúng tôi
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>
