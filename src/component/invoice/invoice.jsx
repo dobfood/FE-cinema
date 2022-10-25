@@ -9,17 +9,23 @@ export default function Invoice() {
     console.log(state);
     return state.bill;
   });
-  const navigate = useNavigate()
+  const movieDetail = useSelector((item) => {
+    // console.log(item.movie.product);
+    // return item.movie.product;
+  });
+
+  const navigate = useNavigate();
   return (
     <div>
       <div class="flex  w-screen h-screen bg-white">
         <div class="container mx-auto my-8 px-8 lg:px-40  ">
           <div class="ml-40 p-8 my-4 md:px-12 lg:w-9/12 lg:pl-20 lg:pr-40 mr-auto rounded-2xl shadow-2xl">
-            <div class="flex">
-              <h4 class="font-bold uppercase text-3xl text-amber-600">
+            <div class=" font-bold uppercase text-3xl text-amber-600 mb-2">
+              <h4 >
                 Vui lòng thanh toán
               </h4>
             </div>
+             <h2 class=" font-bold uppercase text-3xl text-stone-600">Tên Phim:{} </h2>
             <div class="grid grid-cols-2 gap-x-28 md:grid-cols mt-5">
               <div>
                 <p className="text-stone-900 ml-2 text-lg">Tên</p>
@@ -61,9 +67,11 @@ export default function Invoice() {
               </div>
               <div>
                 <p className="text-stone-900 ml-2 text-lg">Vị trí ghế</p>
+
                 <input
                   class="w-full bg-gray-100 text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline"
                   type="text"
+                  value={detailBill.position.map((i) => i)}
                 />
               </div>
             </div>
@@ -81,9 +89,9 @@ export default function Invoice() {
 
             <div class="my-2 w-1/2 lg:w-2/4 flex ml-80">
               <button
-              onClick={()=>{
-                navigate('/mua-ve/chon-ghe')
-              }}
+                onClick={() => {
+                  navigate("/mua-ve/chon-ghe");
+                }}
                 class="uppercase text-sm font-bold tracking-wide bg-blue-700 text-gray-100 p-3 rounded-lg w-full mx-5
                             hover:bg-blue-600 active:bg-blue-600  focus:ring-blue-300"
               >
