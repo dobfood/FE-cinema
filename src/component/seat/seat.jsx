@@ -106,7 +106,7 @@ export default function Seat() {
         }
       />
 
-      <p className="info text-lg" style={{ marginBottom: 20 }}>
+      <p className="info text-lg text-stone-700" style={{ marginBottom: 20 }}>
         Bạn đã chọn <span className="count">{totalQuantity}</span> ghế và tổng
         tiền cần thanh toán là{" "}
         <span className="total ">{totalMoney}.000 VND</span>

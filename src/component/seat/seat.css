@@ -68,14 +68,14 @@ body {
 .Cinema .screen {
   margin-bottom: 100;
   height: 80px;
-  background: white;
+  background:#626262;
   width: 100%;
   transform: rotateX(-30deg) scale(1.1);
   box-shadow: 0 3px 10px 2px;
 }
 
 .Cinema .screen .text {
-  color: #222222;
+  color: #c5c3c3;
   transform: rotateX(-30deg) scale(1.1);
   font-size: xx-large;
   width: 300px;

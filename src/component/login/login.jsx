@@ -51,13 +51,10 @@ export default function Login() {
           >
             <div className="lg:w-3/5 lg:pr-0 pr-0">
               <h1 className="title-font font-medium font-bold text-5xl text-white">
-                Slow-carb next level shoindcgoitch ethical authentic, poko
-                scenester
+                Chúng tôi còn hơn cả PHIM
               </h1>
-              <p className="leading-relaxed mt-4 text-white">
-                Poke slow-carb mixtape knausgaard, typewriter street art
-                gentrify hammock starladder roathse. Craies vegan tousled etsy
-                austin.
+              <p className="leading-relaxed mt-4 text-white text-4xl">
+                Chúng tôi là cinema
               </p>
             </div>
             <div className="lg:w-2/6 xl:w-2/5 md:w-2/3 bg-gray-100 rounded-lg p-8 flex flex-col lg:ml-auto w-full mt-10 lg:mt-0">

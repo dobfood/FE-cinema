@@ -19,7 +19,7 @@ const dispatch = useDispatch()
     <Disclosure as="nav" className=" w-screen">
       {({ open }) => (
         <>
-          <div className="mx-auto max-w-8xl px-2 sm:px-6 lg:px-8 flex ">
+          <div className="mx-auto max-w-8xl px-2 sm:px-6 lg:px-8 flex bg-gray-900">
             <div className="relative flex h-16 items-center justify-between w-full">
               <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                 {/* Mobile menu button*/}
@@ -82,7 +82,8 @@ const dispatch = useDispatch()
 
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
-                    <button
+                    <Link
+                     to="gioi-thieu"
                       className={HomeCss(
                         current
                           ? "bg-gray-900 text-white"
@@ -92,7 +93,7 @@ const dispatch = useDispatch()
                       aria-current={current ? "page" : undefined}
                     >
                       Về chúng tôi
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

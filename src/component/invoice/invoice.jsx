@@ -1,5 +1,7 @@
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useState } from "react";
 
 export default function Invoice() {
   const account = useSelector((state) => {
@@ -9,10 +11,31 @@ export default function Invoice() {
     return state.bill;
   });
   const movieDetail = useSelector((item) => {
-    console.log(item.movie.productDetail);
     return item.movie.productDetail;
   });
+  const [ticket, setTicket] = useState([]);
+  const [CCCD, setCCCD] = useState("");
 
+  const handleSubmit = (data) => {
+    console.log(data);
+    setTicket([
+      ...ticket,
+      {
+        name: account.user.name,
+        nameMovie: movieDetail[0].name,
+        email: account.user.email,
+        quantity: detailBill.quantity,
+        seat: detailBill.position,
+        date: movieDetail[0].date,
+        time: detailBill.time,
+        totalMoney: detailBill.totalMoney,
+        CCCD: CCCD,
+        type: movieDetail[0].category,
+        age: movieDetail[0].Age,
+        cinema: detailBill.theaterName,
+      },
+    ]);
+  };
   const navigate = useNavigate();
   return (
     <div>
@@ -30,7 +53,7 @@ export default function Invoice() {
                 Tên: {account.user.name}
               </p>
               <p className="text-stone-900 ml-2 text-lg w-full  text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline">
-                Rạp: {account.user.name}
+                Rạp: {detailBill.theaterName}
               </p>
               <p className="text-stone-900 ml-2 text-lg w-full  text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline">
                 Email: {account.user.email}
@@ -41,21 +64,24 @@ export default function Invoice() {
               <p className=" flex text-stone-900 ml-2 text-lg w-full  text-gray-900 mt-2 p-3 ">
                 CMND/CCCD:
                 <input
+                  onChange={(e) => {
+                    setCCCD(e.target.value);
+                  }}
                   className="ml-2 w-full bg-gray-100 text-gray-900 rounded-lg "
                   type="number"
                 ></input>
               </p>
               <p className="text-stone-900 ml-2 text-lg w-full  text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline">
-                Giờ chiếu:
+                Giờ chiếu: {detailBill.time}
               </p>
               <p className="text-stone-900 ml-2 text-lg w-full  text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline">
                 Thể loại/Độ tuổi: {movieDetail[0] && movieDetail[0].category}/
                 {movieDetail[0] && movieDetail[0].Age}
               </p>
               <p className="text-stone-900 ml-2 text-lg w-full  text-gray-900 mt-2 p-3 rounded-lg focus:outline-none focus:shadow-outline">
-                Vị trí ghế: 
-                {detailBill.position.map((item) => (
-                  item
+                Vị trí ghế:
+                {detailBill.position.map((seat) => (
+                  <a className="text-lg">{seat},</a>
                 ))}
               </p>
             </div>
@@ -81,7 +107,9 @@ export default function Invoice() {
               >
                 Quay lại
               </button>
+
               <button
+                onClick={async (data) => handleSubmit(data)}
                 class="uppercase text-sm font-bold tracking-wide bg-orange-700 text-gray-100 p-3 rounded-lg w-full
                           focus:outline-none focus:shadow-outline  hover:bg-orange-600 active:bg-orange-600  focus:ring-orange-300"
               >
@@ -94,3 +122,4 @@ export default function Invoice() {
     </div>
   );
 }
+
