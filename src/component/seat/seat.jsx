@@ -13,6 +13,7 @@ import {
   quantity,
   sumTotalMoney,
   position,
+  deletePosition,
 } from "../../feauture/account/bill.slice";
 
 const movies = [
@@ -34,8 +35,6 @@ export default function Seat() {
   const dispatch = useDispatch();
 
   function Cinema({ movie, selectedSeats, onSelectedSeatsChange }) {
-    const [seated, setSeated] = useState();
-    console.log(seated);
     function handleSelectedState(seat, key) {
       const isSelected = selectedSeats.includes(seat);
       if (isSelected) {
@@ -47,7 +46,7 @@ export default function Seat() {
         onSelectedSeatsChange([...selectedSeats, seat]);
         setIsSelectedSeat(true);
       }
-      dispatch(position(key+1))
+      dispatch(position(key + 1));
     }
 
     return (
@@ -81,7 +80,7 @@ export default function Seat() {
                       ? null
                       : (e) => {
                           if (e.key === "Enter") {
-                            handleSelectedState(key, seat);
+                            handleSelectedState(seat, key);
                           }
                         }
                   }
@@ -107,7 +106,7 @@ export default function Seat() {
         }
       />
 
-      <p className="info text-lg" style={{ marginBottom: 20 }}>
+      <p className="info text-lg text-stone-700" style={{ marginBottom: 20 }}>
         Bạn đã chọn <span className="count">{totalQuantity}</span> ghế và tổng
         tiền cần thanh toán là{" "}
         <span className="total ">{totalMoney}.000 VND</span>

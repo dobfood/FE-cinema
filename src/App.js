@@ -12,7 +12,6 @@ import MenuBar from "./component/menu/menu";
 import Footer from "./component/footer/footer";
 import About from "./component/aboutus/about";
 
-
 function App() {
   return (
     <>

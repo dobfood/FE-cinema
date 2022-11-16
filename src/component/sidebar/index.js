@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
 import { getMovieDetail, searchFillterChange } from "../../app/reducer";
+import { isLogin } from "../../feauture/account/account.slice";
 
 export default function Sidebar() {
   const navigate = useNavigate();
@@ -17,25 +18,17 @@ export default function Sidebar() {
     });
     return search1;
   });
-  // console.log(productSearch)
-
-  // const handleSearch = (e) => {
-  //   setState(
-  //    e.target.value
-  //   )
-  // }
-  // console.log(state)
+  const checkLogin = useSelector((state) => {
+    console.log(state.account);
+    return state.account.isLogin;
+  });
 
   const handleChangeSearch = (e) => {
     dispatch(searchFillterChange(e.target.value));
   };
 
-  // const handleDetails = (product) => {
-  //   const detailProduct = product.name.replace(/\s/g,"-")
-  //   navigate(`/chi-tiet/:${detailProduct}`)
-  // }
   return (
-    <>
+    <div className="mx-2">
       <div
         id="carouselExampleCaptions"
         className="carousel slide relative "
@@ -126,124 +119,13 @@ export default function Sidebar() {
           <span className="visually-hidden">Next</span>
         </button>
       </div>
-      {/* hr */}
-      <div className="relative flex py-5 items-center">
-        <div className="flex-grow border-t border-gray-600"></div>
-        <span className="flex-shrink mx-4 text-gray-600">Mua vé nhanh</span>
-        <div className="flex-grow border-t border-gray-600"></div>
-      </div>
-      {/* Mua vé  nhanh*/}
-      <div className="container">
-        <form>
-          <div className="flex flex-wrap -mx-3 mb-2">
-            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="grid-city"
-              >
-                Họ và tên :
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-city"
-                type="text"
-                placeholder=""
-              />
-            </div>
-            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="grid-state"
-              >
-                Thể loại phim
-              </label>
-              <div className="relative">
-                <select
-                  className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                  id="grid-state"
-                >
-                  <option>Bat Man</option>
-                  <option>Marvel</option>
-                  <option>Superman</option>
-                </select>
-                <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-                  <svg
-                    className="fill-current h-4 w-4"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-                  </svg>
-                </div>
-              </div>
-            </div>
-            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="grid-zip"
-              >
-                Rạp :
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-zip"
-                type="text"
-                placeholder="Rạp Hà Đông"
-              />
-            </div>
-            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="grid-zip"
-              >
-                Số ghế :
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-zip"
-                type="text"
-              />
-            </div>
-            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="grid-zip"
-              >
-                Zip
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-zip"
-                type="text"
-              />
-            </div>
-            <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
-              <label
-                className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
-                htmlFor="grid-zip"
-              >
-                Số điện thoại
-              </label>
-              <input
-                className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
-                id="grid-zip"
-                type="text"
-              />
-            </div>
-          </div>
-          <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 border border-blue-700 rounded">
-            Mua vé
-          </button>
-        </form>
-      </div>
-      {/* hr */}
-      <div className="relative flex py-5 items-center">
+      <div className="relative flex py-5 items-center bg-white my-2">
         <div className="flex-grow border-t border-gray-600"></div>
         <span className="flex-shrink mx-4 text-gray-600">Danh sách phim </span>
         <div className="flex-grow border-t border-gray-600"></div>
       </div>
       {/* Search */}
-      <form>
+      <form className="mx-6">
         <label
           for="default-search"
           class="mb-2 text-sm font-medium text-gray-900 sr-only dark:text-gray-300"
@@ -279,26 +161,28 @@ export default function Sidebar() {
         </div>
       </form>
       {/* Product */}
-      <div className="bg-white">
+      
+      <div className="mx-6">
         <div>
-          <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+          <div className="mt-6 grid grid-cols-1 gap-y-20 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
             {productSearch.map((product) => (
-              <div key={product.id} className="group relative">
-                <div className="min-h-80 aspect-w-1 aspect-h-1 w-full overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80 ">
+              <div key={product.id} className=" group relative ">
+                <div className="min-h-80 aspect-w-1 aspect-h-1 overflow-hidden rounded-md bg-gray-200 lg:aspect-none lg:h-80 ">
                   <span className="items-center justify-center absolute my-36  ml-28 z-50 ">
                     <p className="bg-orange-600 opacity-0 group-hover:opacity-100 ml-5 text-center mb-5 mr-2">
                       {product.Age}
                     </p>
-                    <Link
+                    <button
                       onClick={() => {
-                        dispatch(getMovieDetail(product.id));
+                        dispatch(getMovieDetail(product.id)) 
+                        checkLogin? navigate(`/chi-tiet/${product.id}`): navigate('/dang-nhap')
                       }}
-                      to={`/chi-tiet/${product.id}`}
+                      // to={}
                       // type="submit"
                       class=" opacity-0 group-hover:opacity-100 text-white font-bold py-2 px-4 border border-black-700 rounded"
                     >
                       Mua vé
-                    </Link>
+                    </button>
                   </span>
                   <img
                     src={product.imageSrc}
@@ -306,18 +190,20 @@ export default function Sidebar() {
                     className="h-full w-full object-cover object-center lg:h-full lg:w-full group-hover:opacity-75"
                   />
                 </div>
+               
                 <div className="mt-4 flex justify-between">
                   <div>
                     <h3 className="text-sm text-gray-700">
-                      <Link
-                        to={`/chi-tiet/${product.id}`}
+                      
+                      <button
                         onClick={() => {
-                          dispatch(getMovieDetail(product.id));
+                          dispatch(getMovieDetail(product.id)) 
+                          checkLogin? navigate(`/chi-tiet/${product.id}`): navigate('/dang-nhap')
                         }}
                       >
                         <span aria-hidden="true" className="absolute inset-0" />
                         {product.name}
-                      </Link>
+                      </button>
                     </h3>
                     <p className="mt-1 text-sm text-gray-500">
                       {product.engname}
@@ -330,13 +216,13 @@ export default function Sidebar() {
         </div>
       </div>
       {/* hr */}
-      <div className="relative flex py-5 items-center">
-        <div className="flex-grow border-t border-gray-600"></div>
-        <span className="flex-shrink mx-4 text-gray-600">New Feeds</span>
+      <div className="relative flex py-5 items-center bg-white">
+        <div className="flex-grow border-t border-gray-600 bg-white"></div>
+        <span className="flex-shrink mx-4 text-gray-600 bg-white">New Feeds</span>
         <div className="flex-grow border-t border-gray-600"></div>
       </div>
       {/* New Feed  */}
-      <div className="max-w-screen-xl mx-auto p-4">
+      <div className="max-w-screen-xl mx-auto p-4 bg-white">
         <h1 className="text-5xl font-extrabold mb-4 text-center text-indigo-700">
           BLOG ĐIỆN ẢNH
         </h1>
@@ -499,7 +385,7 @@ export default function Sidebar() {
         </div>
       </div>
       {/* hr */}
-      <div className="inline-flex justify-center items-center w-full">
+      <div className="inline-flex justify-center items-center w-full bg-w">
         <hr className="my-8 w-64 h-1 bg-gray-600 rounded border-0 dark:bg-gray-700" />
         <div className="absolute left-1/2 px-4 bg-white -translate-x-1/2 dark:bg-gray-900">
           <svg
@@ -516,6 +402,6 @@ export default function Sidebar() {
           </svg>
         </div>
       </div>
-    </>
+    </div>
   );
 }

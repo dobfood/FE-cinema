@@ -6,7 +6,8 @@ const bills = createSlice({
     totalMoney: 0,
     quantity: 0,
     position: [],
-    detailMovie:[]
+    time: "",
+    theaterName:''
   },
   reducers: {
     sumTotalMoney: (state, action) => {
@@ -19,14 +20,16 @@ const bills = createSlice({
       console.log(action.payload);
       state.position.push(action.payload);
     },
-    
-    detailMovie: (state, action) => {
-      state.detailMovie.push(action.payload);
+    getTime : (state, action) => {
+      state.time = action.payload;
+    },
+    getTheaterName : (state, action) => {
+      state.theaterName = action.payload;
     }
-   
   },
 });
 
-export const { sumTotalMoney, quantity, position } = bills.actions;
+export const { sumTotalMoney, quantity, position, deletePosition,getTime,getTheaterName } =
+  bills.actions;
 
 export default bills.reducer;

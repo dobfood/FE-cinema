@@ -8,7 +8,6 @@ export default function Master() {
     <>
       {/* <MenuBar/> */}
       <Outlet />
-     
     </>
   );
 }
